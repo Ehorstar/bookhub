@@ -68,3 +68,32 @@
   height: 40px;
   border-left: 1px solid rgba(165, 187, 205, 0.67);
 }
+
+.link {
+  position: relative;
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.link::after {
+  content: "";
+  left: 0;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background-color: rgb(13, 89, 220);
+  transition: width 0.3s ease;
+  position: absolute;
+}
+
+.link:hover {
+  color: rgb(13, 89, 220);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
