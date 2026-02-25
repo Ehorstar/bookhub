@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1740px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-family: var(--font-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg);
+}
+
+:root {
+  --color-bg: #ffffff;
+  --color-header: #ffffff;
+  --color-footer: #ffffff;
+  --color-textFirst: #000000;
+  --color-textSecond: #777;
+  --font-base: "SN Pro", sans-serif;
+  --color-price: #ff0000;
+  --color-overlay: rgba(0, 0, 0, 0.178);
+  --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.171);
+}
