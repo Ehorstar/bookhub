@@ -1,0 +1,22 @@
+.icon {
+  font-size: 28px;
+  padding: 14px 14px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.icon:hover {
+  background-color: rgba(165, 187, 205, 0.237);
+}
+
+.iconActive {
+  font-size: 28px;
+  color: rgb(13, 89, 220);
+  padding: 14px 14px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.iconActive:hover {
+  background-color: rgba(13, 89, 220, 0.358);
+}
