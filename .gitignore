@@ -1,0 +1,21 @@
+# frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# backend
+backend/**/bin/
+backend/**/obj/
+backend/**/appsettings.Development.json
+
+# Visual Studio
+.vs/
+**/.vs/
+*.user
+*.suo
+*.slnx
+
+# general
+.env
+.vscode/
+.idea/
