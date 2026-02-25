@@ -3,9 +3,8 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 6px 12px;
   background-color: var(--color-header);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--box-shadow);
 }
 
 .header img {
@@ -49,6 +48,20 @@
   position: relative;
 }
 
-.wishlist{
+.wishlist {
   cursor: pointer;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 10px;
 }

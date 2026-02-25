@@ -6,6 +6,9 @@ import Delivery from "./Delivery";
 import Bonuses from "./Bonuses";
 import ToWishlist from "./ToWishlist";
 import ToCart from "./ToCart";
+import Links from "./Links";
+import Menu from "./Menu";
+import Profile from "./Profile";
 
 function Header() {
   const navigate = useNavigate();
@@ -24,17 +27,25 @@ function Header() {
           <div className="deviderVertical" />
           <Bonuses />
           <div className="deviderVertical" />
+          <Menu />
+          <div className="deviderVertical" />
           <div className={styles.icons}>
             <div className={styles.wishlist}>
               <ToWishlist />
             </div>
-            
             <div className={styles.cart}>
               <ToCart />
             </div>
           </div>
         </div>
       </div>
+      <div className="devider" />
+      <div className="container">
+        <div className={styles.bottom}>
+          <Links />
+        </div>
+      </div>
+      <Profile />
     </header>
   );
 }
