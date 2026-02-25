@@ -12,6 +12,25 @@
   flex-direction: column;
 }
 
+.tippy-box[data-theme~="menu"] {
+  background-color: #2b2f36;
+  color: #fff;
+  font-size: 14px;
+  padding: 0;
+  border-radius: 6px;
+  font-family: var(--font-base);
+  text-align: center;
+  white-space: pre-line;
+}
+
+.tippy-box[data-theme~="menu"] .tippy-content {
+  padding: 6px 10px;
+}
+
+.tippy-box[data-theme~="menu"] .tippy-arrow {
+  color: #2b2f36;
+}
+
 .container {
   max-width: 1740px;
   margin: 0 auto;
@@ -38,4 +57,14 @@
   --color-price: #ff0000;
   --color-overlay: rgba(0, 0, 0, 0.178);
   --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.171);
+}
+
+.devider {
+  width: 100%;
+  border-bottom: 1px solid rgba(165, 187, 205, 0.67);
+}
+
+.deviderVertical {
+  height: 40px;
+  border-left: 1px solid rgba(165, 187, 205, 0.67);
 }
