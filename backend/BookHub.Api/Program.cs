@@ -1,5 +1,11 @@
+using ASP.MongoDb.API.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//Bind mongoDb settings
+
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection(nameof(MongoDbSettings)));
 // Add services to the container.
 
 builder.Services.AddControllers();
