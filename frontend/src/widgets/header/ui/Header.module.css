@@ -1,0 +1,67 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--color-header);
+  box-shadow: var(--box-shadow);
+}
+
+.header img {
+  width: 80px;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px 12px;
+}
+
+.deviderVertical {
+  height: 40px;
+  border-left: 1px solid #e5e7eb;
+}
+
+.deviderHorizontal {
+  width: 100%;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px 12px;
+}
+
+.cart {
+  cursor: pointer;
+  position: relative;
+}
+
+.wishlist {
+  cursor: pointer;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 10px;
+}

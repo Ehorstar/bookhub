@@ -12,6 +12,25 @@
   flex-direction: column;
 }
 
+.tippy-box[data-theme~="menu"] {
+  background-color: #2b2f36;
+  color: #fff;
+  font-size: 14px;
+  padding: 0;
+  border-radius: 6px;
+  font-family: var(--font-base);
+  text-align: center;
+  white-space: pre-line;
+}
+
+.tippy-box[data-theme~="menu"] .tippy-content {
+  padding: 6px 10px;
+}
+
+.tippy-box[data-theme~="menu"] .tippy-arrow {
+  color: #2b2f36;
+}
+
 .container {
   max-width: 1740px;
   margin: 0 auto;
@@ -39,3 +58,42 @@
   --color-overlay: rgba(0, 0, 0, 0.178);
   --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.171);
 }
+
+.devider {
+  width: 100%;
+  border-bottom: 1px solid rgba(165, 187, 205, 0.67);
+}
+
+.deviderVertical {
+  height: 40px;
+  border-left: 1px solid rgba(165, 187, 205, 0.67);
+}
+
+.link {
+  position: relative;
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.link::after {
+  content: "";
+  left: 0;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background-color: rgb(13, 89, 220);
+  transition: width 0.3s ease;
+  position: absolute;
+}
+
+.link:hover {
+  color: rgb(13, 89, 220);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+

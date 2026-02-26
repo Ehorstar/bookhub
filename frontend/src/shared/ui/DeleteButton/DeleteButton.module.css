@@ -1,0 +1,10 @@
+.actionIcon {
+  font-size: 25px;
+  padding: 14px 14px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.actionIcon:hover {
+  background-color: rgba(165, 187, 205, 0.237);
+}

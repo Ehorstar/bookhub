@@ -1,0 +1,89 @@
+.main {
+  position: relative;
+  user-select: none;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 16px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+  min-width: 240px;
+}
+
+.content:hover {
+  background-color: rgba(165, 187, 205, 0.237);
+}
+
+.dropDown {
+  position: absolute;
+  left: 0;
+  min-width: 320px;
+  top: calc(100% + 10px);
+  background-color: var(--color-header);
+  border-radius: 10px;
+  padding: 12px 0px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.icon {
+  font-size: 25px;
+}
+
+.itemIcon {
+  font-size: 25px;
+}
+
+.iconArrow {
+  font-size: 18px;
+  transition: transform 0.25s ease;
+  margin-left: auto;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.text {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 12px 23px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+  width: 100%;
+}
+
+.itemText {
+  font-size: 18px;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.item:hover {
+  background-color: rgba(165, 187, 205, 0.237);
+}
