@@ -1,0 +1,22 @@
+export type Book = {
+  id: string;
+  title: string;
+  author: string;
+  description: string;
+  price: number;
+  oldPrice?: number;
+  inStock: boolean;
+  stockCount: number;
+  coverImage: string;
+  images: string[];
+  categories: string[];
+  language: string;
+  publisher: string;
+  year: number;
+  pages: number;
+  binding: "Тверда" | "Мʼяка";
+  isbn: string;
+  rating: number;
+  reviewsCount: number;
+  slug: string;
+};
