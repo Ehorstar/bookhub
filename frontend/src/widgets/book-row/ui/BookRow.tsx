@@ -1,11 +1,14 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Row.module.css";
-import "swiper/css";
-import { useGetAllBooksQuery } from "../../../entities/Book/api/api";
 import Arrow from "../../../shared/ui/Arrow/Arrow";
+import { useGetAllBooksQuery } from "../../../entities/Book/api/api";
+import { Swiper, SwiperSlide } from "swiper/react";
 import BookCard from "../../../entities/Book";
 
-function Artistic() {
+type BookRowProps = {
+  genre: string;
+};
+
+function BookRow({ genre }: BookRowProps) {
   const { data = [], isLoading, error } = useGetAllBooksQuery();
 
   if (isLoading) return <p>Loading...</p>;
@@ -14,7 +17,7 @@ function Artistic() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Детектив</h1>
+        <h1 className={styles.title}>{genre}</h1>
         <Arrow text="Побачити більше" className={styles.Arrow} />
       </div>
 
@@ -30,7 +33,7 @@ function Artistic() {
         className={styles.list}
       >
         {data
-          .filter((book) => book.categories.includes("Детектив"))
+          .filter((book) => book.categories.includes(genre))
           .slice(0, 8)
           .map((book) => (
             <SwiperSlide key={book.id}>
@@ -42,4 +45,4 @@ function Artistic() {
   );
 }
 
-export default Artistic;
+export default BookRow;
