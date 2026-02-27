@@ -3,8 +3,8 @@ import DeleteButton from "../../../shared/ui/DeleteButton/DeleteButton";
 import Tippy from "@tippyjs/react";
 import styles from "./CartItem.module.css";
 import Genre from "../../../shared/ui/Genre/Genre";
-import AddToWishlist from "../../../features/wishlist/ui/AddToWishlistButton";
 import type { CartItemProps } from "../model/cart-item";
+import AddToWishlistButton from "../../../features/wishlist/ui/AddToWishlistButton";
 
 function CartItem({
   item: it,
@@ -36,7 +36,7 @@ function CartItem({
         <div className="devider" />
 
         <div className={styles.itemDown}>
-          <AddToWishlist className={styles.icon} />
+          <AddToWishlistButton className={styles.icon} bookId={it.id} />
 
           <div className={styles.quantity}>
             <Tippy
@@ -77,11 +77,11 @@ function CartItem({
           <div className={styles.pricesFixed}>
             <div className="prices">
               {it.oldPrice ? (
-                <p className="oldPrice">{it.oldPrice * quantity} грн</p>
+                <p className="oldPrice">{it.oldPrice * quantity} ETH</p>
               ) : (
                 <p className="oldPriceHidden">None</p>
               )}
-              <p className="price">{it.price * quantity} грн</p>
+              <p className="price">{it.price * quantity} ETH</p>
             </div>
           </div>
         </div>
