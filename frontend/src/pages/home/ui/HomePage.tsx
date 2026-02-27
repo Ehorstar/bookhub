@@ -7,9 +7,12 @@ function HomePage() {
   return (
     <div className={styles.content}>
       <HeroSlider />
-      <BookRow genre="Детектив" />
-      <BookRow genre="Горор" />
-      <BookRow genre="Фантастика" />
+      <div className={styles.bookRows}>
+        <BookRow genre="Детектив" />
+        <BookRow genre="Фентезі" />
+        <BookRow genre="Горор" />
+        <BookRow genre="Фантастика" />
+      </div>
     </div>
   );
 }

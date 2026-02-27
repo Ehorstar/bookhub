@@ -9,7 +9,7 @@ function CartDrawer() {
   const show = isOpen("cart");
   return (
     <div className={styles.main}>
-      <div className={styles.cart} onClick={() => toggle("cart")}>
+      <div className={styles.cartButton} onClick={() => toggle("cart")}>
         <ShoppingCartButton />
       </div>
 

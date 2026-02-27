@@ -5,7 +5,7 @@ import Pluralize from "../../../shared/ui/Pluralize/Pluralize";
 import { useGetCartQuery } from "../../../features/cart/api/cart.api";
 
 import { AddToCartButton, InCartButton } from "../../../features/cart";
-import AddToWishlist from "../../../features/wishlist/ui/AddToWishlist";
+import AddToWishlist from "../../../features/wishlist/ui/AddToWishlistButton";
 
 function BookCard({ book }: { book: Book }) {
   const { data, isLoading } = useGetCartQuery();
@@ -37,7 +37,7 @@ function BookCard({ book }: { book: Book }) {
               <AddToCartButton bookId={book.id} price={book.price} />
             )}
 
-            <AddToWishlist className={styles.wishlistButton} />
+            <AddToWishlist bookId={book.id} className={styles.wishlistButton} />
 
             <div className={styles.reviewsCount}>
               <Pluralize

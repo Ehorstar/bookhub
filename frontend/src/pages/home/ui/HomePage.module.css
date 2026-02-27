@@ -1,5 +1,6 @@
 .content{
     flex: 1;
     display: flex;
+    gap:40px;
     flex-direction: column;
 }

@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: 500;
+  color: var(--color-textFirst);
+}

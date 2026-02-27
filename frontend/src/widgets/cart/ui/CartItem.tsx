@@ -3,7 +3,7 @@ import DeleteButton from "../../../shared/ui/DeleteButton/DeleteButton";
 import Tippy from "@tippyjs/react";
 import styles from "./CartItem.module.css";
 import Genre from "../../../shared/ui/Genre/Genre";
-import AddToWishlist from "../../../features/wishlist/ui/AddToWishlist";
+import AddToWishlist from "../../../features/wishlist/ui/AddToWishlistButton";
 import type { CartItemProps } from "../model/cart-item";
 
 function CartItem({
