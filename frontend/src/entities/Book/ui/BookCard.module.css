@@ -1,0 +1,68 @@
+.bookCard {
+  position: relative;
+  height: auto;
+  cursor: pointer;
+  background-color: var(--color-header);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.066);
+  transition: transform 300ms ease;
+}
+
+.bookCard:hover {
+  transform: translateY(-15px);
+}
+
+.bookInfo {
+  padding: 5px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bookCover {
+  padding: 16px 50px 0 50px;
+}
+
+.img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+.title {
+  font-size: 19px;
+  font-weight: 600;
+  min-height: calc(2 * 1.25em);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ratingValue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 20px;
+}
+
+.starActive {
+  color: #f5a623;
+  font-size: 23px;
+}
+
+.starNone {
+  color: #c4c4c4;
+  font-size: 23px;
+}
+
+.ratingNumber {
+  color: #222;
+}
+
+.reviewsCount {
+  font-size: 18px;
+  color: #777;
+}

@@ -1,0 +1,31 @@
+.page {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  padding: 40px 0;
+  gap: 30px;
+}
+
+.list {
+  width: 100%;
+  overflow: visible !important;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: 600;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.Arrow {
+  font-size: 24px;
+  font-weight: 600;
+  padding-right: 30px;
+}
