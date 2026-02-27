@@ -20,3 +20,4 @@ export type Book = {
   reviewsCount: number;
   slug: string;
 };
+

@@ -3,12 +3,13 @@ import styles from "./BookCard.module.css";
 import type { Book } from "../model/types";
 import Pluralize from "../../../shared/ui/Pluralize/Pluralize";
 import { useGetCartQuery } from "../../../features/cart/api/cart.api";
-import AddToWishlist from "../../../features/wishlist";
+
 import { AddToCartButton, InCartButton } from "../../../features/cart";
+import AddToWishlist from "../../../features/wishlist/ui/AddToWishlist";
 
 function BookCard({ book }: { book: Book }) {
   const { data, isLoading } = useGetCartQuery();
-  const cart = data?.cart;
+  const cart = data?.items;
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -30,13 +31,13 @@ function BookCard({ book }: { book: Book }) {
               <span className={styles.ratingNumber}>{book.rating}</span>
             </div>
 
-            {cart?.items.find((item) => item.bookId === book.id) ? (
+            {cart?.items.find((item) => item.book.id === book.id) ? (
               <InCartButton />
             ) : (
               <AddToCartButton bookId={book.id} price={book.price} />
             )}
 
-            <AddToWishlist />
+            <AddToWishlist className={styles.wishlistButton} />
 
             <div className={styles.reviewsCount}>
               <Pluralize
