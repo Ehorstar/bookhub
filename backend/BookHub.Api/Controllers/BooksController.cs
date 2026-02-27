@@ -34,6 +34,13 @@ namespace BookHub.Api.Controllers
             return Ok(book);
         }
 
+        [HttpPost("byIds")]
+        public async Task<IActionResult> GetBooksByIds([FromBody] List<string> ids)
+        {
+            var books = await _bookRepository.GetByIdsAsync(ids);
+            return Ok(books);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateBook([FromBody] Book book)
         {

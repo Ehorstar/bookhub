@@ -1,4 +1,5 @@
-﻿using BookHub.Api.Entities;
+﻿using BookHub.Api.Dtos;
+using BookHub.Api.Entities;
 using BookHub.Api.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,16 +11,22 @@ namespace BookHub.Api.Controllers
     {
         private const string CartCookieName = "cartId";
         private readonly ICartRepository _cartRepository;
-        public CartController(ICartRepository cartRepository)
+        private readonly IBookRepository _bookRepository;
+
+        public CartController(
+           ICartRepository cartRepository,
+           IBookRepository bookRepository)
         {
             _cartRepository = cartRepository;
+            _bookRepository = bookRepository;
         }
+
         private CookieOptions BuildCartCookieOptions()
         {
             return new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
+                Secure = Request.IsHttps,
                 SameSite = SameSiteMode.Lax,
                 Expires = DateTimeOffset.UtcNow.AddDays(30)
             };
@@ -39,14 +46,55 @@ namespace BookHub.Api.Controllers
             return (newCart, true);
 
         }
+        private async Task<CartDto> BuildCartDtoAsync(Cart cart)
+        {
+            var ids = cart.Items
+                .Select(i => i.BookId)
+                .Where(id => !string.IsNullOrWhiteSpace(id))
+                .Distinct()
+                .ToList();
+
+            var books = await _bookRepository.GetByIdsAsync(ids);
+
+            var bookById = books.ToDictionary(b => b.Id!, b => b);
+
+            var itemsDto = new List<CartItemDto>();
+
+            foreach (var it in cart.Items)
+            {
+                if (!bookById.TryGetValue(it.BookId, out var book))
+                    continue;
+
+                var price = it.Price != 0 ? it.Price : book.Price;
+
+                itemsDto.Add(new CartItemDto
+                {
+                    Book = book,
+                    Quantity = it.Quantity,
+                    Total = price * it.Quantity
+                });
+            }
+
+            var total = itemsDto.Sum(x => x.Total);
+
+            return new CartDto
+            {
+                CartId = cart.CartId,
+                Items = itemsDto,
+                Total = total
+            };
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetCartAsync()
         {
             var (cart, isNew) = await GetOrCreateCartAsync();
+            var items = await BuildCartDtoAsync(cart);
+
             return Ok(new
             {
                 message = isNew ? "Cart created" : "Cart found",
-                cart
+                items = items
             });
         }
 
@@ -55,14 +103,16 @@ namespace BookHub.Api.Controllers
         {
             var (cart, _) = await GetOrCreateCartAsync();
             var exist = cart.Items.FirstOrDefault(i => i.BookId == item.BookId);
+            
             if (exist != null) return NoContent();
             else cart.Items.Add(item);
             cart.UpdatedAt = DateTime.UtcNow;
             await _cartRepository.UpdateAsync(cart.Id!, cart);
+            var items = await BuildCartDtoAsync(cart);
             return Ok(new
             {
                 message = "Item was add",
-                cart
+                items = items
             });
         }
 
@@ -71,6 +121,7 @@ namespace BookHub.Api.Controllers
         {
             var (cart, _) = await GetOrCreateCartAsync();
             var exist = cart.Items.FirstOrDefault(i => i.BookId == bookId);
+           
             if (qty <= 0)
             {
                 cart.Items.Remove(exist);
@@ -85,11 +136,11 @@ namespace BookHub.Api.Controllers
 
             cart.UpdatedAt = DateTime.UtcNow;
             await _cartRepository.UpdateAsync(cart.Id!, cart);
-
+            var items = await BuildCartDtoAsync(cart);
             return Ok(new
             {
                 message = "Item Qty was set",
-                cart
+                items = items
             });
         }
 
@@ -104,10 +155,11 @@ namespace BookHub.Api.Controllers
                 cart.UpdatedAt = DateTime.UtcNow;
                 await _cartRepository.UpdateAsync(cart.Id!, cart);
             }
+            var items = await BuildCartDtoAsync(cart);
             return Ok(new
             {
                 message =  "Item deleted",
-                cart
+                items = items
             });
         }
     }

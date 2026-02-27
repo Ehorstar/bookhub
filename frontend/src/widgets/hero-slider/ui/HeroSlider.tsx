@@ -6,11 +6,11 @@ import "swiper/css/effect-fade";
 
 import styles from "./HeroSlider.module.css";
 
-import hero1 from "../../assets/ImagesHero/hero-1.png";
-import hero2 from "../../assets/ImagesHero/hero-2.png";
-import hero3 from "../../assets/ImagesHero/hero-3.png";
-import hero4 from "../../assets/ImagesHero/hero-4.png";
-import hero5 from "../../assets/ImagesHero/hero-5.png";
+import hero1 from "../../../assets/ImagesHero/hero-1.png";
+import hero2 from "../../../assets/ImagesHero/hero-2.png";
+import hero3 from "../../../assets/ImagesHero/hero-3.png";
+import hero4 from "../../../assets/ImagesHero/hero-4.png";
+import hero5 from "../../../assets/ImagesHero/hero-5.png";
 import { useNavigate } from "react-router-dom";
 
 const slides = [

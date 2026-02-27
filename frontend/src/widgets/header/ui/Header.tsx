@@ -5,10 +5,10 @@ import Search from "./Search";
 import Delivery from "./Delivery";
 import Bonuses from "./Bonuses";
 import ToWishlist from "./ToWishlist";
-import ToCart from "./ToCart";
 import Links from "./Links";
 import Menu from "./Menu";
 import Profile from "./Profile";
+import CartDrawer from "../../cart/ui/CartDrawer";
 
 function Header() {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function Header() {
               <ToWishlist />
             </div>
             <div className={styles.cart}>
-              <ToCart />
+              <CartDrawer />
             </div>
           </div>
         </div>
