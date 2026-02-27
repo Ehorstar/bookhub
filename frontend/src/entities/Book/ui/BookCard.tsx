@@ -2,8 +2,16 @@ import { StarFilled } from "@ant-design/icons";
 import styles from "./BookCard.module.css";
 import type { Book } from "../model/types";
 import Pluralize from "../../../shared/ui/Pluralize/Pluralize";
+import { useGetCartQuery } from "../../../features/cart/api/cart.api";
+import AddToWishlist from "../../../features/wishlist";
+import { AddToCartButton, InCartButton } from "../../../features/cart";
 
 function BookCard({ book }: { book: Book }) {
+  const { data, isLoading } = useGetCartQuery();
+  const cart = data?.cart;
+
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <div className={styles.bookCard}>
       <div className={styles.bookCover}>
@@ -21,6 +29,14 @@ function BookCard({ book }: { book: Book }) {
               <StarFilled className={styles.starActive} />
               <span className={styles.ratingNumber}>{book.rating}</span>
             </div>
+
+            {cart?.items.find((item) => item.bookId === book.id) ? (
+              <InCartButton />
+            ) : (
+              <AddToCartButton bookId={book.id} price={book.price} />
+            )}
+
+            <AddToWishlist />
 
             <div className={styles.reviewsCount}>
               <Pluralize

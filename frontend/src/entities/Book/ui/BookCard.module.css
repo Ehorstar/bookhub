@@ -66,12 +66,3 @@
   font-size: 18px;
   color: #777;
 }
-
-.favouriteIcon {
-  position: absolute;
-}
-
-.favouriteButton {
-  position: absolute;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-}
