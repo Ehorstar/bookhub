@@ -9,7 +9,7 @@ function CartTotalBar({ total }: ToolbarProps) {
       <div className={styles.totalLeft}>
         <span className={styles.text}>Разом:</span>
         <p className={styles.price}>{total}</p>
-        <span className={styles.text}>грн</span>
+        <span className={styles.text}>ETH</span>
       </div>
 
       <div className={styles.totalRight}>

@@ -12,7 +12,7 @@ const Bonuses = () => {
       </div>
 
       <p className={styles.title}>Бонуси: </p>
-      <p className={styles.subtitle}>{bonuses} грн</p>
+      <p className={styles.subtitle}>{bonuses} ETH</p>
     </div>
   );
 };

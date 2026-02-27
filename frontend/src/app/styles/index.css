@@ -53,7 +53,7 @@
 }
 
 :root {
-  --color-bg: #ffffff;
+  --color-bg: rgba(184, 198, 209, 0.129);
   --color-header: #ffffff;
   --color-footer: #ffffff;
   --color-textFirst: #000000;

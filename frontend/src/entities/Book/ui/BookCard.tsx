@@ -65,11 +65,11 @@ function BookCard({ book }: { book: Book }) {
 
         <div className="prices">
           {book.oldPrice ? (
-            <p className="oldPrice">{book.oldPrice} грн</p>
+            <p className="oldPrice">{book.oldPrice} ETH</p>
           ) : (
             <p className="oldPriceHidden">None</p>
           )}
-          <p className="price">{book.price} грн</p>
+          <p className="price">{book.price} ETH</p>
         </div>
       </div>
     </div>
