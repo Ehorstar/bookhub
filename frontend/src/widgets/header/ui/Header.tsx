@@ -33,9 +33,8 @@ function Header() {
             <div className={styles.wishlist}>
               <ToWishlist />
             </div>
-            <div className={styles.cart}>
-              <CartDrawer />
-            </div>
+
+            <CartDrawer />
           </div>
         </div>
       </div>

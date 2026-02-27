@@ -18,6 +18,7 @@ function BookRow({ genre }: BookRowProps) {
     <div className={styles.page}>
       <div className={styles.header}>
         <h1 className={styles.title}>{genre}</h1>
+        <h1 className={styles.shadowTitle}>{genre}</h1>
         <Arrow text="Побачити більше" className={styles.Arrow} />
       </div>
 

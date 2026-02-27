@@ -2,8 +2,9 @@
   user-select: none;
 }
 
-.cart {
+.cartButton {
   position: relative;
+  cursor: pointer;
 }
 
 .overlay {
