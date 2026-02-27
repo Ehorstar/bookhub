@@ -8,70 +8,107 @@ namespace BookHub.Api.Controllers
     [Route("api/cart")]
     public class CartController : ControllerBase
     {
+        private const string CartCookieName = "cartId";
         private readonly ICartRepository _cartRepository;
-
         public CartController(ICartRepository cartRepository)
         {
             _cartRepository = cartRepository;
         }
-
-        [HttpGet("{cartId}")]
-        public async Task<ActionResult<Cart>> GetCart(string cartId)
+        private CookieOptions BuildCartCookieOptions()
         {
-            var cart = await _cartRepository.GetByCartIdAsync(cartId);
-
-            if (cart == null)
-                return NotFound();
-
-            return Ok(cart);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Cart>> CreateCart()
-        {
-            var cart = new Cart
+            return new CookieOptions
             {
-                CartId = Guid.NewGuid().ToString()
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.AddDays(30)
             };
+        }
+        private async Task<(Cart cart, bool isNew)> GetOrCreateCartAsync()
+        {
+            if (Request.Cookies.TryGetValue(CartCookieName, out var cartId))
+            {
+                var cart = await _cartRepository.GetByCartIdAsync(cartId);
+                if (cart != null)
+                {
+                    return (cart, false);
+                }
+            }
+            var newCart = await _cartRepository.CreateNewAsync();
+            Response.Cookies.Append(CartCookieName, newCart.CartId, BuildCartCookieOptions());
+            return (newCart, true);
 
-            await _cartRepository.CreateAsync(cart);
-            return Ok(cart);
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetCartAsync()
+        {
+            var (cart, isNew) = await GetOrCreateCartAsync();
+            return Ok(new
+            {
+                message = isNew ? "Cart created" : "Cart found",
+                cart
+            });
         }
 
-        [HttpPost("{cartId}/items")]
-        public async Task<IActionResult> AddItem(string cartId, [FromBody] CartItem item)
+        [HttpPost("items")]
+        public async Task<ActionResult> AddToCart([FromBody] CartItem item)
         {
-            var cart = await _cartRepository.GetByCartIdAsync(cartId);
+            var (cart, _) = await GetOrCreateCartAsync();
+            var exist = cart.Items.FirstOrDefault(i => i.BookId == item.BookId);
+            if (exist != null) return NoContent();
+            else cart.Items.Add(item);
+            cart.UpdatedAt = DateTime.UtcNow;
+            await _cartRepository.UpdateAsync(cart.Id!, cart);
+            return Ok(new
+            {
+                message = "Item was add",
+                cart
+            });
+        }
 
-            if (cart == null)
-                return NotFound();
-
-            var existingItem = cart.Items.FirstOrDefault(i => i.BookId == item.BookId);
-
-            if (existingItem != null)
-                existingItem.Quantity += item.Quantity;
+        [HttpPut("items/{bookId}/qty/{qty}")]
+        public async Task<ActionResult> SetItemQty(string bookId, int qty)
+        {
+            var (cart, _) = await GetOrCreateCartAsync();
+            var exist = cart.Items.FirstOrDefault(i => i.BookId == bookId);
+            if (qty <= 0)
+            {
+                cart.Items.Remove(exist);
+            }
             else
-                cart.Items.Add(item);
+            {
+                if (exist == null)
+                    cart.Items.Add(new CartItem { BookId = bookId, Quantity = qty, Price = 0 });
+                else
+                    exist.Quantity = qty;
+            }
 
             cart.UpdatedAt = DateTime.UtcNow;
             await _cartRepository.UpdateAsync(cart.Id!, cart);
 
-            return NoContent();
+            return Ok(new
+            {
+                message = "Item Qty was set",
+                cart
+            });
         }
 
-        [HttpDelete("{cartId}/items/{bookId}")]
-        public async Task<IActionResult> RemoveItem(string cartId, string bookId)
+        [HttpDelete("items/{bookId}")]
+        public async Task<ActionResult> RemoveFromCart(string bookId)
         {
-            var cart = await _cartRepository.GetByCartIdAsync(cartId);
-
-            if (cart == null)
-                return NotFound();
-
-            cart.Items.RemoveAll(i => i.BookId == bookId);
-            cart.UpdatedAt = DateTime.UtcNow;
-
-            await _cartRepository.UpdateAsync(cart.Id!, cart);
-            return NoContent();
+            var (cart, _) = await GetOrCreateCartAsync();
+            var exist = cart.Items.FirstOrDefault(i => i.BookId == bookId);
+            if (exist != null)
+            {
+                cart.Items.Remove(exist);
+                cart.UpdatedAt = DateTime.UtcNow;
+                await _cartRepository.UpdateAsync(cart.Id!, cart);
+            }
+            return Ok(new
+            {
+                message =  "Item deleted",
+                cart
+            });
         }
     }
 }

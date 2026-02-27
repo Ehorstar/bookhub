@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 public class Repository<T> : IRepository<T> where T : class
 { 
-    private readonly IMongoCollection<T> _collection;    
+    protected readonly IMongoCollection<T> _collection;    
     public Repository(IOptions<MongoDbSettings> settings)
     {
         var client = new MongoClient(settings.Value.ConnectionString);
