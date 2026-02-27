@@ -4,23 +4,29 @@ using MongoDB.Driver;
 
 namespace BookHub.Api.Repository
 {
+    public interface ICartRepository : IRepository<Cart>
+    {
+        Task<Cart> CreateNewAsync();
+        Task<Cart?> GetByCartIdAsync(string cartId);
+    }
     public class CartRepository : Repository<Cart>, ICartRepository
     {
-        private readonly IMongoCollection<Cart> _collection;
-
-        public CartRepository(IOptions<MongoDbSettings> settings)
-            : base(settings)
+        public CartRepository(IOptions<MongoDbSettings> settings) : base(settings)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
-            var database = client.GetDatabase(settings.Value.DatabaseName);
-            _collection = database.GetCollection<Cart>(nameof(Cart));
         }
-
-        public async Task<Cart?> GetByCartIdAsync(string cartId)
+        public async Task<Cart> CreateNewAsync()
         {
-            return await _collection
-                .Find(c => c.CartId == cartId)
-                .FirstOrDefaultAsync();
+            var cart = new Cart
+            {
+                CartId = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            await _collection.InsertOneAsync(cart);
+            return cart;
         }
+        public Task<Cart?> GetByCartIdAsync(string cartId) =>
+            _collection.Find(c => c.CartId == cartId).FirstOrDefaultAsync();
     }
 }
