@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { CartItem, CartResponse } from "../model/cart.types";
+import type { AddCartItemRequest, CartResponse } from "../model/cart.types";
+
 
 export const cartApi = createApi({
   reducerPath: "cartApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://localhost:55026/api",
+    baseUrl: "/api",
     credentials: "include",
   }),
   tagTypes: ["Cart"],
@@ -14,7 +15,7 @@ export const cartApi = createApi({
       providesTags: ["Cart"],
     }),
 
-    addItem: builder.mutation<void, CartItem>({
+    addItem: builder.mutation<CartResponse, AddCartItemRequest>({
       query: (item) => ({
         url: "/cart/items",
         method: "POST",

@@ -1,12 +1,14 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import styles from "./ShoppingCart.module.css";
-// import { useGetCartsQuery } from "../../../features/cart/api/carts.api";
+
 import Tippy from "@tippyjs/react";
+import { useGetCartQuery } from "../../../features/cart/api/cart.api";
 
 function ShoppingCartButton() {
-  //   const { data: cart } = useGetCartsQuery();
+  const { data } = useGetCartQuery();
+  const cart = data?.items;
 
-  const count = 5;
+  const count = cart?.items.length || 0;
 
   return (
     <Tippy content="Кошик" delay={[100, 100]} theme="menu">

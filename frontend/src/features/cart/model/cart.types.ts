@@ -1,18 +1,24 @@
+import type { Book } from "../../../entities/Book/model/types";
+
 export type CartItem = {
-  bookId: string;
+  book: Book;
   quantity: number;
-  price: number;
+  total: number;
 };
 
 export type Cart = {
-  id?: string;
   cartId: string;
   items: CartItem[];
-  createdAt: string;
-  updatedAt: string;
+  total: number;
 };
 
 export type CartResponse = {
   message: string;
-  cart: Cart;
+  items: Cart;
+};
+
+export type AddCartItemRequest = {
+  bookId: string;
+  quantity: number;
+  price: number;
 };
