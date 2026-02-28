@@ -2,20 +2,6 @@ using BookHub.Api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("Frontend", policy =>
-    {
-        policy
-            .WithOrigins(
-                "http://localhost:5173"
-            )
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
-    });
-});
-
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection(nameof(MongoDbSettings)));
 // Add services to the container.
@@ -40,8 +26,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors("Frontend");
 
 app.UseAuthorization();
 

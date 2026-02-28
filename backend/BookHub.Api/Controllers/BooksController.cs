@@ -23,6 +23,17 @@ namespace BookHub.Api.Controllers
             return Ok(books);
         }
 
+       [HttpGet("slug/{slug}")]
+        public async Task<IActionResult> GetBookBySlug(string slug)
+        {
+            var book = await _bookRepository.GetBySlugAsync(slug);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
+        }   
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookById(string id)
         {
