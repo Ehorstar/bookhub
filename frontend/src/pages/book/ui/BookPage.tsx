@@ -8,11 +8,24 @@ import {
   BookGallery,
   BookTitle,
 } from "../../../widgets/book-page";
+import { useRecentlyViewedStore } from "../../../features/recently-viewed/model/recently-viewed.store";
+import { useEffect } from "react";
 
 function BookPage() {
   const { slug } = useParams<{ slug: string }>();
 
   const { data: book, isLoading, error } = useGetBookBySlugQuery(slug!);
+  const add = useRecentlyViewedStore((s) => s.add);
+
+  useEffect(() => {
+    if (!book) return;
+    add({
+      id: book.id,
+      slug: book.slug,
+      title: book.title,
+      coverImage: book.coverImage,
+    });
+  }, [book]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error not found</div>;

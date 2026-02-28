@@ -1,6 +1,6 @@
 import styles from "./CartDrawer.module.css";
 import { CloseOutlined } from "@ant-design/icons";
-import { useUiState } from "../../header/model/modal-state";
+import { useUiState } from "../../header/model/modal-state.store";
 import ShoppingCartButton from "../../../shared/ui/ShoppingCart/ShopingCart";
 import CartPhysicalTab from "./CartPhysicalTab";
 
