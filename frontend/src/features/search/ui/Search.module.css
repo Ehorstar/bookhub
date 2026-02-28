@@ -2,38 +2,6 @@
   position: relative;
 }
 
-.search {
-  z-index: 1000;
-  position: relative;
-  display: flex;
-  align-items: center;
-  background-color: rgba(165, 187, 205, 0.237);
-  border-radius: 50px;
-  padding: 6px 16px;
-  transition: box-shadow 0.3s ease;
-}
-
-.search:hover {
-  box-shadow: var(--box-shadow);
-}
-
-.search:focus-within {
-  box-shadow: 0 0 0 2px rgb(13, 89, 220);
-}
-
-.search input {
-  border: none;
-  outline: none;
-  background: transparent;
-  padding: 14px 12px;
-  font-size: 20px;
-  min-width: 420px;
-}
-
-.searchActive {
-  background-color: white;
-}
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -51,62 +19,4 @@
   pointer-events: auto;
 }
 
-.item {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 16px;
-  border-radius: 15px;
-  transition: box-shadow 0.3s ease;
-}
 
-.item:hover {
-  background-color: rgba(165, 187, 205, 0.237);
-}
-
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  min-width: 600px;
-  z-index: 1000;
-  position: absolute;
-  margin-top: 10px;
-  gap: 10px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: var(--box-shadow);
-}
-
-.icon {
-  font-size: 25px;
-  color: rgb(0, 0, 0);
-  flex-shrink: 0;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.text {
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.author {
-  font-size: 16px;
-}
-
-.priceBlock {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
