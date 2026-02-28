@@ -1,4 +1,3 @@
-
 import styles from "./BookTitle.module.css";
 import {
   BookOutlined,
@@ -8,12 +7,15 @@ import {
 import Pluralize from "../../../shared/ui/Pluralize/Pluralize";
 import type { Book } from "../../../entities/Book/model/types";
 import { Rate } from "antd";
+import { useNavigate } from "react-router-dom";
 
 type BookTitleProps = {
   book: Book;
 };
 
 export default function BookTitle({ book }: BookTitleProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <div className={styles.rating}>
@@ -26,7 +28,7 @@ export default function BookTitle({ book }: BookTitleProps) {
           />
           <p className={styles.text}>{book.rating}</p>
         </div>
-        <div className={`${styles.reviews} ${"link"}`}>
+        <div className={`${styles.reviews} ${styles.link}`}>
           <Pluralize
             count={book.reviewsCount}
             one="оцінка"
@@ -41,12 +43,10 @@ export default function BookTitle({ book }: BookTitleProps) {
         <p className={styles.text}>{book.author}</p>
       </div>
 
- 
-        <div className={`${styles.typeCard} ${styles.paper}`}>
-          <p className={styles.typeTitle}>Паперова книга</p>
-          <p className="price">{book.price} ETH</p>
-        </div>
-  
+      <div className={`${styles.typeCard} ${styles.paper}`}>
+        <p className={styles.typeTitle}>Паперова книга</p>
+        <p className="price">{book.price} ETH</p>
+      </div>
 
       <div className={styles.description}>
         <p className={styles.text}>
@@ -64,7 +64,12 @@ export default function BookTitle({ book }: BookTitleProps) {
 
       <div className={styles.genre}>
         <div className="devider" />
-        <p className={styles.text}>{book.categories[0]}</p>
+        <p
+          className={styles.link}
+          onClick={() => navigate(`/books/${book.categories[0]}`)}
+        >
+          {book.categories[0]}
+        </p>
         <div className="devider" />
       </div>
     </div>

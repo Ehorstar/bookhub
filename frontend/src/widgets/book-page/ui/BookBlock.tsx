@@ -13,7 +13,7 @@ export default function BookBlock({ book }: BookBlockProps) {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <Bonuses count={Math.floor(book.price * 0.02)} />
+        <Bonuses count={(book.price * 0.02)} />
         <InStock inStock={book.inStock} />
       </div>
 
