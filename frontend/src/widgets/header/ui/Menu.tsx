@@ -7,7 +7,7 @@ import {
   UpOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useUiState } from "../model/modal-state";
+import { useUiState } from "../model/modal-state.store";
 
 function Menu() {
   const [show, setShow] = useState(false);

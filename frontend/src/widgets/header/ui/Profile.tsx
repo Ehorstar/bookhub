@@ -10,7 +10,7 @@ import {
 import styles from "./Profile.module.css";
 import Tippy from "@tippyjs/react";
 
-import { useUiState } from "../model/modal-state";
+import { useUiState } from "../model/modal-state.store";
 import DeleteButton from "../../../shared/ui/DeleteButton/DeleteButton";
 
 function Profile() {

@@ -9,6 +9,7 @@ import CartButton from "../../../features/cart/ui/CartButton";
 function BookCard({ book }: { book: Book }) {
   const navigate = useNavigate();
   const stop = (e: React.MouseEvent) => e.stopPropagation();
+
   return (
     <div
       className={styles.bookCard}
