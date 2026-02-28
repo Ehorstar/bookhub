@@ -14,6 +14,9 @@ export const booksApi = createApi({
       query: (id) => `books/${id}`,
       providesTags: ["Books"],
     }),
+    searchBooks: build.query<Book[], string>({
+      query: (query) => `books/search?query=${query}`,
+    }),
     getBookBySlug: build.query<Book, string>({
       query: (slug) => `books/slug/${slug}`,
       providesTags: ["Books"],
@@ -48,6 +51,7 @@ export const {
   useGetAllBooksQuery,
   useGetBookByIdQuery,
   useGetBookBySlugQuery,
+  useSearchBooksQuery,
   useCreateBookMutation,
   useUpdateBookMutation,
   useDeleteBookMutation,
