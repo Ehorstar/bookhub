@@ -50,11 +50,6 @@ function BookDescription({ book }: BookDescriptionProps) {
           <span className={styles.label}>Рік видання</span>
           <span className={styles.value}>{book.year}</span>
         </div>
-
-        <div className={styles.specRow}>
-          <span className={styles.label}>ISBN</span>
-          <span className={styles.value}>{book.isbn}</span>
-        </div>
       </div>
     </div>
   );

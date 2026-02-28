@@ -1,7 +1,6 @@
 import styles from "./Header.module.css";
 import logo from "../../../assets/ImagesHeader/logo.png";
 import { useNavigate } from "react-router-dom";
-import Search from "./Search";
 import Delivery from "./Delivery";
 import Bonuses from "./Bonuses";
 import ToWishlist from "./ToWishlist";
@@ -9,6 +8,7 @@ import Links from "./Links";
 import Menu from "./Menu";
 import Profile from "./Profile";
 import CartDrawer from "../../cart/ui/CartDrawer";
+import Search from "../../../features/search";
 
 function Header() {
   const navigate = useNavigate();

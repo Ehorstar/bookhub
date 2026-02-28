@@ -9,7 +9,7 @@ import "./styles/index.css";
 
 function App() {
   const { isOpen } = useUiState();
-  const locked = isOpen("cart") || isOpen("profile");
+  const locked = isOpen("cart") || isOpen("profile") || isOpen("search");
   const books = useRecentlyViewedStore((s) => s.items);
 
   return (

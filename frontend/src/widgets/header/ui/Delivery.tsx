@@ -10,7 +10,7 @@ const Delivery = () => {
 
       <div className={styles.text}>
         <p className={styles.title}>Безкоштовна доставка</p>
-        <p className={styles.subtitle}>від 990ETH</p>
+        <p className={styles.subtitle}>від 30ETH</p>
       </div>
     </div>
   );

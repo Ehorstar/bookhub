@@ -1,4 +1,6 @@
 .search {
+  z-index: 1000;
+  position: relative;
   display: flex;
   align-items: center;
   background-color: rgba(165, 187, 205, 0.237);
@@ -8,7 +10,7 @@
 }
 
 .search:hover {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
 }
 
 .search:focus-within {
@@ -22,6 +24,10 @@
   padding: 14px 12px;
   font-size: 20px;
   min-width: 420px;
+}
+
+.searchActive {
+  background-color: white;
 }
 
 .icon {
