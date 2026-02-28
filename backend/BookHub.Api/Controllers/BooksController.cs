@@ -23,7 +23,14 @@ namespace BookHub.Api.Controllers
             return Ok(books);
         }
 
-       [HttpGet("slug/{slug}")]
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchBooks([FromQuery] string query)
+        {
+            var books = await _bookRepository.SearchBooks(query);
+            return Ok(books);
+        }
+
+        [HttpGet("slug/{slug}")]
         public async Task<IActionResult> GetBookBySlug(string slug)
         {
             var book = await _bookRepository.GetBySlugAsync(slug);
