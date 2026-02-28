@@ -1,0 +1,23 @@
+.stock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  padding: 5px 10px;
+}
+
+.inStock {
+  background-color: #d6f1ee;
+  color: #0f8f87;
+  font-size: 18px;
+}
+
+.notInStock {
+  color: rgb(220, 13, 13);
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.icon{
+ font-size: 15;
+}

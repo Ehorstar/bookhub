@@ -29,7 +29,7 @@
 }
 
 .title {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
   min-height: calc(2 * 1.25em);
 }
@@ -72,4 +72,10 @@
   top: 20px;
   right: 20px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cartButton {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
 }

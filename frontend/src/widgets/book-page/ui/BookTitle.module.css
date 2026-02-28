@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reviews {
+  display: flex;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--color-textSecond);
+}
+
+
+.text {
+  color: var(--color-textFirst);
+  font-size: 22px;
+}
+
+.typeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 110px;
+  padding: 25px 30px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+}
+
+.typeTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--card-color);
+}
+
+.paper {
+  --card-border: #FF3B3B;
+  --card-color: #FF3B3B;
+}
+
+.genre {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
