@@ -1,8 +1,7 @@
 .button {
+  flex: 1;
+  width: 100%;
   background-color: rgb(13, 89, 220);
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
   cursor: pointer;
   border-radius: 50px;
   border: none;

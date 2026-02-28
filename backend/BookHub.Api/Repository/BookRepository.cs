@@ -8,6 +8,7 @@ namespace BookHub.Api.Repository
     public interface IBookRepository : IRepository<Book>
     {
         Task<List<Book>> GetByIdsAsync(List<string> ids);
+        Task<Book> GetBySlugAsync(string slug);
     }
     public class BookRepository : Repository<Book>, IBookRepository
     {
@@ -27,7 +28,11 @@ namespace BookHub.Api.Repository
             
             }
         
-           
+           public async Task<Book> GetBySlugAsync(string slug)
+           {
+            var filter = Builders<Book>.Filter.Eq("Slug", slug);
+            return await _collection.Find(filter).FirstOrDefaultAsync();
+        }
     }
     
 }

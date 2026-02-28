@@ -2,19 +2,18 @@ import { StarFilled } from "@ant-design/icons";
 import styles from "./BookCard.module.css";
 import type { Book } from "../model/types";
 import Pluralize from "../../../shared/ui/Pluralize/Pluralize";
-import { useGetCartQuery } from "../../../features/cart/api/cart.api";
-
-import { AddToCartButton, InCartButton } from "../../../features/cart";
 import AddToWishlist from "../../../features/wishlist/ui/AddToWishlistButton";
+import { useNavigate } from "react-router-dom";
+import CartButton from "../../../features/cart/ui/CartButton";
 
 function BookCard({ book }: { book: Book }) {
-  const { data, isLoading } = useGetCartQuery();
-  const cart = data?.items;
-
-  if (isLoading) return <p>Loading...</p>;
-
+  const navigate = useNavigate();
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
   return (
-    <div className={styles.bookCard}>
+    <div
+      className={styles.bookCard}
+      onClick={() => navigate(`/book/${book.slug}`)}
+    >
       <div className={styles.bookCover}>
         <img
           src={book.coverImage}
@@ -31,13 +30,16 @@ function BookCard({ book }: { book: Book }) {
               <span className={styles.ratingNumber}>{book.rating}</span>
             </div>
 
-            {cart?.items.find((item) => item.book.id === book.id) ? (
-              <InCartButton />
-            ) : (
-              <AddToCartButton bookId={book.id} price={book.price} />
-            )}
+            <div onClick={stop}>
+              <div className={styles.cartButton}>
+                <CartButton book={book} />
+              </div>
 
-            <AddToWishlist bookId={book.id} className={styles.wishlistButton} />
+              <AddToWishlist
+                bookId={book.id}
+                className={styles.wishlistButton}
+              />
+            </div>
 
             <div className={styles.reviewsCount}>
               <Pluralize
