@@ -15,10 +15,12 @@ namespace BookHub.Api.Entities
         [BsonElement("email")]
         public string Email { get; set; } = default!;
 
+        [BsonElement("phone")]
+        public string Phone { get; set; }
+
         [BsonElement("passwordhash")]
         public string PasswordHash { get; set; } = default!;
 
-        // profile
         [BsonElement("firstName")]
         public string? FirstName { get; set; }
 
@@ -28,7 +30,6 @@ namespace BookHub.Api.Entities
         [BsonElement("birthDate")]
         public DateTime? BirthDate { get; set; }
 
-        [BsonElement("phone")]
-        public string? Phone { get; set; }
+        
     }
 }

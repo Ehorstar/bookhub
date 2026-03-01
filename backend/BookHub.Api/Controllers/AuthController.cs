@@ -4,6 +4,7 @@ using BookHub.Api.Repository;
 using BookHub.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -23,9 +24,35 @@ namespace BookHub.Api.Controllers
             _jwt = jwt;
         }
 
-        [Authorize]
         [HttpGet("status")]
-        public IActionResult Status() => Ok();
+        public async Task<IActionResult> Status()
+        {
+            var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+
+            if (!isAuthenticated)
+                return Ok(new { isAuthenticated = false });
+
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+                         ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(userId))
+                return Ok(new { isAuthenticated = false });
+
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null)
+                return Ok(new { isAuthenticated = false });
+
+            return Ok(new
+            {
+                isAuthenticated = true,
+                userId = user.Id,
+                email = user.Email,
+                username = user.UserName,
+                firstName = user.FirstName,
+                lastName = user.LastName,
+                phone = user.Phone,
+                birthDate = user.BirthDate
+            });
+        }
 
         [HttpPost("register")]
         public async Task<ActionResult<object>> Register([FromBody] RegisterRequestDto req)
@@ -40,13 +67,13 @@ namespace BookHub.Api.Controllers
             {
                 UserName = req.UserName,
                 Email = req.Email,
-                PasswordHash = hash
-
+                PasswordHash = hash,
+                Phone = req.Phone
             };
 
             await _userRepository.CreateUserAsync(user);
 
-            return Ok(new { user.Id, user.UserName, user.Email });
+            return Ok(new { user.Id, user.UserName, user.Email, user.Phone });
         }
 
         [HttpPost("login")]
@@ -72,15 +99,16 @@ namespace BookHub.Api.Controllers
 
             return Ok(new
             {
-                user = new { user.Id, user.UserName, user.Email }
+                user = new { user.Id, user.UserName, user.Email, user.Phone, user.FirstName,user.LastName, user.BirthDate }
             });
         }
 
-        [Authorize]
+       
         [HttpPatch("profile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequestDto req)
         {
-            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+                         ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
             var user = await _userRepository.GetByIdAsync(userId);
