@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import RecentlyViewed from "../features/recently-viewed";
 import { useRecentlyViewedStore } from "../features/recently-viewed/model/recently-viewed.store";
 import { BodyScrollLock } from "../shared/lib/BodyScroll/BodyScroll";
@@ -11,6 +12,13 @@ function App() {
   const { isOpen } = useUiState();
   const locked = isOpen("cart") || isOpen("profile") || isOpen("search");
   const books = useRecentlyViewedStore((s) => s.items);
+  const hiddenRoutes = [
+    "/about",
+    "/questions",
+    "/payment-delivery",
+    "/users-agreement",
+  ];
+  const location = useLocation();
 
   return (
     <div className="app">
@@ -21,8 +29,11 @@ function App() {
           <Router />
         </div>
       </main>
-      {books.length > 0 ?<RecentlyViewed />: null}
-      
+      {!hiddenRoutes.includes(location.pathname) && books.length > 0 ? (
+        <RecentlyViewed />
+      ) : (
+        ""
+      )}
       <Footer />
     </div>
   );

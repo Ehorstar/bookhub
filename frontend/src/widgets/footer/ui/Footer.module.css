@@ -24,6 +24,17 @@
   gap: 16px;
 }
 
+.link {
+  cursor: pointer;
+  color: var(--color-textFirst);
+  font-size: 22px;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: rgb(13, 89, 220);
+}
+
 .links {
   display: flex;
   justify-content: space-between;

@@ -17,7 +17,7 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbsProps[] }) {
           return (
             <li key={i} className={styles.item}>
               {item.to && !isLast ? (
-                <Link className={`${"link"} ${styles.link}`} to={item.to}>
+                <Link className={styles.link} to={item.to}>
                   {item.label}
                 </Link>
               ) : (
