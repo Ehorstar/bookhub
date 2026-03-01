@@ -1,0 +1,34 @@
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace BookHub.Api.Entities
+{
+    public class User
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+
+        [BsonElement("username")]
+        public string UserName { get; set; } = default!;
+
+        [BsonElement("email")]
+        public string Email { get; set; } = default!;
+
+        [BsonElement("passwordhash")]
+        public string PasswordHash { get; set; } = default!;
+
+        // profile
+        [BsonElement("firstName")]
+        public string? FirstName { get; set; }
+
+        [BsonElement("lastName")]
+        public string? LastName { get; set; }
+
+        [BsonElement("birthDate")]
+        public DateTime? BirthDate { get; set; }
+
+        [BsonElement("phone")]
+        public string? Phone { get; set; }
+    }
+}
