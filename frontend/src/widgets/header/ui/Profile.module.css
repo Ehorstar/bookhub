@@ -80,7 +80,6 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .container {
@@ -143,4 +142,36 @@
 .value {
   font-size: 20px;
   color: var(--color-textFirst);
+}
+
+.input {
+  width: 320px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(165, 187, 205, 0.35);
+  background: #eaf2ff;
+  color: var(--color-textFirst);
+  font-size: 16px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4c8bf5;
+  box-shadow: 0 0 0 3px rgba(76, 139, 245, 0.2);
+}
+
+.error {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  color: #ff6b6b;
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-textSecond);
+  font-size: 14px;
 }
