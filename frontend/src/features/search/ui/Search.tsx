@@ -19,7 +19,8 @@ const Search = () => {
     close("search");
   }
 
-  const { data: books = [], isFetching } = useSearchBooksQuery(query);
+  const q = query.trim();
+  const { data: books = [], isFetching } = useSearchBooksQuery(q, { skip: !q });
 
   return (
     <div className={styles.wrapper}>

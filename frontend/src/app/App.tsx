@@ -10,7 +10,12 @@ import "./styles/index.css";
 
 function App() {
   const { isOpen } = useUiState();
-  const locked = isOpen("cart") || isOpen("profile") || isOpen("search");
+  const locked =
+    isOpen("cart") ||
+    isOpen("profile") ||
+    isOpen("search") ||
+    isOpen("login") ||
+    isOpen("register");
   const books = useRecentlyViewedStore((s) => s.items);
   const hiddenRoutes = [
     "/about",

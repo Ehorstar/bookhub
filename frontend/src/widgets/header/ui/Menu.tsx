@@ -8,11 +8,19 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useUiState } from "../model/modal-state.store";
+import {
+  useGetStatusQuery,
+  useLogoutMutation,
+} from "../../../features/auth/api/auth.api";
 
 function Menu() {
   const [show, setShow] = useState(false);
   const { open } = useUiState();
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const [logout] = useLogoutMutation();
+  const { data } = useGetStatusQuery();
+
+  const isAuth = data?.isAuthenticated;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,13 +40,20 @@ function Menu() {
 
   return (
     <div ref={menuRef} className={styles.main}>
-      <div className={styles.content} onClick={() => setShow(!show)}>
-        <UserOutlined className={styles.icon} />
-        <p className={styles.text}>Вітаємо!</p>
-        <UpOutlined
-          className={`${styles.iconArrow} ${show ? styles.rotate : ""}`}
-        />
-      </div>
+      {isAuth ? (
+        <div className={styles.content} onClick={() => setShow(!show)}>
+          <UserOutlined className={styles.icon} />
+          <p className={styles.text}>Вітаємо!</p>
+          <UpOutlined
+            className={`${styles.iconArrow} ${show ? styles.rotate : ""}`}
+          />
+        </div>
+      ) : (
+        <div className={styles.content} onClick={() => open("login")}>
+          <UserOutlined className={styles.icon} />
+          <p className={styles.text}>Авторизуватись</p>
+        </div>
+      )}
 
       <div className={`${styles.dropDown} ${show ? styles.open : ""}`}>
         <button
@@ -63,7 +78,14 @@ function Menu() {
           <span className={styles.itemText}>Бібліотека</span>
         </button>
 
-        <button className={`${styles.item} ${styles.danger}`} type="button">
+        <button
+          className={`${styles.item} ${styles.danger}`}
+          type="button"
+          onClick={() => {
+            logout();
+            setShow(false);
+          }}
+        >
           <LogoutOutlined className={styles.itemIcon} />
           <span className={styles.itemText}>Вийти з аккаунту</span>
         </button>
