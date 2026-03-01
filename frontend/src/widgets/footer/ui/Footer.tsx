@@ -9,26 +9,22 @@ const Footer = () => {
         <div className={styles.rowsUp}>
           <div className={styles.row}>
             <nav className={styles.links}>
-              <a className={`${styles.mainLink} ${"link"}`} href="#">
+              <a className={`${styles.mainLink} ${"link"}`} href="/about">
                 Про BookHub
               </a>
 
-              <a className={`${styles.mainLink} ${"link"}`} href="#">
-                Є питання?
-              </a>
-
-              <a className={"link"} href="#">
+              <a className={"link"} href="payment-delivery">
                 Способи оплати та доставки
               </a>
 
-              <a className={"link"} href="#">
+              <a className={"link"} href="users-agreement">
                 Умови користування
               </a>
 
               <div className={styles.info}>
                 <PhoneOutlined className={styles.icon} />
                 <a
-                  className={"link"}
+                  className={styles.link}
                   onClick={(e) => {
                     e.preventDefault();
                     navigator.clipboard.writeText("0 (96) 292 00 99");
