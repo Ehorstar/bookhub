@@ -12,15 +12,17 @@
   justify-content: space-between;
 }
 
+.totalRow:hover {
+  background-color: rgba(13, 89, 220, 0.823);
+}
+
 .totalLeft {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.totalRow:hover {
-  background-color: rgba(13, 89, 220, 0.823);
-}
+
 
 .text {
   line-height: 1;

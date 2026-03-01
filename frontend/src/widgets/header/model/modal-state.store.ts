@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type Panel = "cart" | "profile" | "search";
+export type Panel = "cart" | "profile" | "search" | "login" | "register";
 
 type UiState = {
   activePanel: Panel | null;

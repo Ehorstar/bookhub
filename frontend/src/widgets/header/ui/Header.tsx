@@ -9,9 +9,11 @@ import Menu from "./Menu";
 import Profile from "./Profile";
 import CartDrawer from "../../cart/ui/CartDrawer";
 import Search from "../../../features/search";
+import { Login, Register } from "../../../features/auth";
 
 function Header() {
   const navigate = useNavigate();
+
   return (
     <header className={styles.header}>
       <div className="container">
@@ -26,8 +28,11 @@ function Header() {
           <Delivery />
           <div className="deviderVertical" />
           <Bonuses />
+
           <div className="deviderVertical" />
+
           <Menu />
+
           <div className="deviderVertical" />
           <div className={styles.icons}>
             <div className={styles.wishlist}>
@@ -45,6 +50,8 @@ function Header() {
         </div>
       </div>
       <Profile />
+      <Register />
+      <Login />
     </header>
   );
 }
