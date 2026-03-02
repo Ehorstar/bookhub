@@ -13,7 +13,7 @@ namespace BookHub.Api.Repository
     }
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(IOptions<MongoDbSettings> settings) : base(settings)
+        public UserRepository(IMongoDatabase database) : base(database)
         {
         }
         public async Task<User> CreateUserAsync(User user)

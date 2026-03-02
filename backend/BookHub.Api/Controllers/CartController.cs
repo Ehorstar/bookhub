@@ -26,9 +26,10 @@ namespace BookHub.Api.Controllers
             return new CookieOptions
             {
                 HttpOnly = true,
-                Secure = Request.IsHttps,
-                SameSite = SameSiteMode.Lax,
-                Expires = DateTimeOffset.UtcNow.AddDays(30)
+                Secure = false,              
+                SameSite = SameSiteMode.Lax, 
+                Expires = DateTimeOffset.UtcNow.AddDays(30),
+           
             };
         }
         private async Task<(Cart cart, bool isNew)> GetOrCreateCartAsync()
@@ -159,6 +160,24 @@ namespace BookHub.Api.Controllers
             return Ok(new
             {
                 message =  "Item deleted",
+                items = items
+            });
+        }
+        [HttpDelete]
+        public async Task<ActionResult> ClearCart()
+        {
+            var (cart, _) = await GetOrCreateCartAsync();
+      
+            cart.Items.Clear();
+            cart.UpdatedAt = DateTime.UtcNow;
+
+            await _cartRepository.UpdateAsync(cart.Id!, cart);
+
+            var items = await BuildCartDtoAsync(cart);
+
+            return Ok(new
+            {
+                message = "Cart cleared",
                 items = items
             });
         }

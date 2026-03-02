@@ -5,6 +5,7 @@ import Pluralize from "../../../shared/ui/Pluralize/Pluralize";
 import AddToWishlist from "../../../features/wishlist/ui/AddToWishlistButton";
 import { useNavigate } from "react-router-dom";
 import CartButton from "../../../features/cart/ui/CartButton";
+import NotInStock from "../../../features/cart/ui/NotInStock";
 
 function BookCard({ book }: { book: Book }) {
   const navigate = useNavigate();
@@ -32,9 +33,17 @@ function BookCard({ book }: { book: Book }) {
             </div>
 
             <div onClick={stop}>
-              <div className={styles.cartButton}>
-                <CartButton book={book} />
-              </div>
+              {book.inStock ? (
+                <div className={styles.cartButton}>
+                  <CartButton book={book} />
+                </div>
+              ) : (
+                <div
+                  className={`${styles.stock} ${styles.notInStock} ${styles.cartButton}`}
+                >
+                  <NotInStock />
+                </div>
+              )}
 
               <AddToWishlist
                 bookId={book.id}

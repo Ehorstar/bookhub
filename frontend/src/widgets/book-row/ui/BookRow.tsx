@@ -1,19 +1,15 @@
 import styles from "./Row.module.css";
 import Arrow from "../../../shared/ui/Arrow/Arrow";
-import { useGetAllBooksQuery } from "../../../entities/Book/api/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import BookCard from "../../../entities/Book";
+import type { Book } from "../../../entities/Book/model/types";
 
 type BookRowProps = {
   genre: string;
+  books: Book[];
 };
 
-function BookRow({ genre }: BookRowProps) {
-  const { data = [], isLoading, error } = useGetAllBooksQuery();
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading books</p>;
-
+function BookRow({ genre, books }: BookRowProps) {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -37,7 +33,7 @@ function BookRow({ genre }: BookRowProps) {
         }}
         className={styles.list}
       >
-        {data
+        {books
           .filter((book) => book.categories.includes(genre))
           .slice(0, 8)
           .map((book) => (

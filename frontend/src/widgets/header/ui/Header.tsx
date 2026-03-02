@@ -2,7 +2,6 @@ import styles from "./Header.module.css";
 import logo from "../../../assets/ImagesHeader/logo.png";
 import { useNavigate } from "react-router-dom";
 import Delivery from "./Delivery";
-import Bonuses from "./Bonuses";
 import ToWishlist from "./ToWishlist";
 import Links from "./Links";
 import Menu from "./Menu";
@@ -26,9 +25,6 @@ function Header() {
           />
           <Search />
           <Delivery />
-          <div className="deviderVertical" />
-          <Bonuses />
-
           <div className="deviderVertical" />
 
           <Menu />

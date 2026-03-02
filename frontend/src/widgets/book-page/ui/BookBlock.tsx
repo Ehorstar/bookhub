@@ -1,7 +1,7 @@
 import type { Book } from "../../../entities/Book/model/types";
 import CartButton from "../../../features/cart/ui/CartButton";
+import NotInStock from "../../../features/cart/ui/NotInStock";
 import AddToWishlistButton from "../../../features/wishlist";
-import Bonuses from "../../../shared/ui/Bonuses/Bonuses";
 import InStock from "../../../shared/ui/InStock/InStock";
 import styles from "./BookBlock.module.css";
 
@@ -13,7 +13,6 @@ export default function BookBlock({ book }: BookBlockProps) {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <Bonuses count={(book.price * 0.02)} />
         <InStock inStock={book.inStock} />
       </div>
 
@@ -30,9 +29,17 @@ export default function BookBlock({ book }: BookBlockProps) {
       </div>
 
       <div className={styles.buttons}>
-        <div className={styles.cartButton}>
-          <CartButton book={book} />
-        </div>
+        {book.inStock ? (
+          <div className={styles.cartButton}>
+            <CartButton book={book} />
+          </div>
+        ) : (
+          <div
+            className={`${styles.stock} ${styles.notInStock} ${styles.cartButton}`}
+          >
+            <NotInStock />
+          </div>
+        )}
 
         <AddToWishlistButton
           bookId={book.id}

@@ -16,7 +16,7 @@ namespace BookHub.Api.Entities
         public string Email { get; set; } = default!;
 
         [BsonElement("phone")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [BsonElement("passwordhash")]
         public string PasswordHash { get; set; } = default!;
@@ -27,9 +27,13 @@ namespace BookHub.Api.Entities
         [BsonElement("lastName")]
         public string? LastName { get; set; }
 
+        [BsonElement("city")]
+        public string? City { get; set; }
+
+        [BsonElement("department")]
+        public string? Department { get; set; }
+
         [BsonElement("birthDate")]
         public DateTime? BirthDate { get; set; }
-
-        
     }
 }

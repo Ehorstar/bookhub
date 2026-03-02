@@ -54,6 +54,7 @@
 
 :root {
   --color-bg: rgba(184, 198, 209, 0.129);
+  --color-main: rgb(13, 89, 220);
   --color-header: #ffffff;
   --color-footer: #ffffff;
   --color-textFirst: #000000;

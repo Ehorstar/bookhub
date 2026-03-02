@@ -22,6 +22,8 @@ function App() {
     "/questions",
     "/payment-delivery",
     "/users-agreement",
+    "/checkout",
+    "/orders",
   ];
   const location = useLocation();
 

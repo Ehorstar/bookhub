@@ -1,6 +1,5 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import styles from "./ShoppingCart.module.css";
-
+import styles from "./ShoppingCartButton.module.css";
 import Tippy from "@tippyjs/react";
 import { useGetCartQuery } from "../../../features/cart/api/cart.api";
 

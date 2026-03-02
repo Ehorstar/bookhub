@@ -8,11 +8,28 @@ namespace BookHub.Api.Repository
     {
         Task<Cart> CreateNewAsync();
         Task<Cart?> GetByCartIdAsync(string cartId);
+        Task SetUserIdAsync(string cartId, string userId);
+        Task ClearByCartIdAsync(string cartId);
     }
     public class CartRepository : Repository<Cart>, ICartRepository
     {
-        public CartRepository(IOptions<MongoDbSettings> settings) : base(settings)
+        public CartRepository(IMongoDatabase database) : base(database)
         {
+        }
+        public async Task SetUserIdAsync(string cartId, string userId)
+        {
+            var filter = Builders<Cart>.Filter.Eq(c => c.CartId, cartId);
+            var update = Builders<Cart>.Update.Set(c => c.UserId, userId);
+            await _collection.UpdateOneAsync(filter, update);
+        }
+
+        public async Task ClearByCartIdAsync(string cartId)
+        {
+            var filter = Builders<Cart>.Filter.Eq(c => c.CartId, cartId);
+            var update = Builders<Cart>.Update
+                .Set(c => c.Items, new List<CartItem>())
+                .Set(c => c.UpdatedAt, DateTime.UtcNow);
+            await _collection.UpdateOneAsync(filter, update);
         }
         public async Task<Cart> CreateNewAsync()
         {

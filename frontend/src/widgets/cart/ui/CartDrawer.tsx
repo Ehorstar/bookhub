@@ -1,7 +1,7 @@
 import styles from "./CartDrawer.module.css";
 import { CloseOutlined } from "@ant-design/icons";
 import { useUiState } from "../../header/model/modal-state.store";
-import ShoppingCartButton from "../../../shared/ui/ShoppingCart/ShopingCart";
+import ShoppingCartButton from "../../../shared/ui/ShoppingCart/ShopingCartButton";
 import CartPhysicalTab from "./CartPhysicalTab";
 
 function CartDrawer() {
@@ -26,6 +26,7 @@ function CartDrawer() {
           />
           <p>Кошик</p>
         </div>
+
         <CartPhysicalTab />
       </div>
     </div>

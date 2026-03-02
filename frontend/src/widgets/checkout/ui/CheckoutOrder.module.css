@@ -1,0 +1,25 @@
+﻿.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.title h1 {
+  margin: 0;
+}
+
+.cartItem {
+  width: 100%;
+}

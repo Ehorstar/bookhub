@@ -1,10 +1,12 @@
-export type StatusResponse = {
+﻿export type StatusResponse = {
   isAuthenticated: boolean;
   userId?: string;
   email?: string;
   username?: string;
   firstName?: string;
   lastName?: string;
+  city?: string;
+  department?: string;
   phone?: string;
   birthDate?: string;
 };
@@ -13,6 +15,9 @@ export type UpdateProfileRequest = Partial<{
   firstName: string | null;
   lastName: string | null;
   birthDate: string | null;
+  city: string | null;
+  department: string | null;
+  phone: string | null;
 }>;
 
 export type RegisterRequest = {

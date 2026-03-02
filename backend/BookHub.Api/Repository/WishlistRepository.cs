@@ -14,7 +14,9 @@ namespace BookHub.Api.Repository
 
     public class WishlistRepository : Repository<Wishlist>, IWishlistRepository
     {
-        public WishlistRepository(IOptions<MongoDbSettings> settings) : base(settings) { }
+        public WishlistRepository(IMongoDatabase database) : base(database)
+        {
+        }
 
         public async Task<Wishlist?> GetByWishlistIdAsync(string wishlistId)
             => await _collection.Find(x => x.Id == wishlistId).FirstOrDefaultAsync();
