@@ -1,0 +1,112 @@
+﻿.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  user-select: none;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input {
+  width: 350px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(165, 187, 205, 0.3);
+  background-color: #eaf2ff;
+  color: var(--color-textFirst);
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4c8bf5;
+  box-shadow: var(--box-shadow);
+}
+
+.deliverySection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.deliveryBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgb(13, 89, 220);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.freeDelivery {
+  border-color: rgb(51, 220, 13);
+}
+
+.deliveryLogo {
+  width: 70px;
+  height: auto;
+}
+
+.deliveryText h3,
+.deliveryText p {
+  margin: 0;
+}
+
+.payment {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment p {
+  margin: 0;
+}
+
+.error {
+  margin: 0;
+  padding: 12px 14px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  color: #ff6b6b;
+  border-radius: 12px;
+}
