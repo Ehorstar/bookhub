@@ -73,3 +73,15 @@
   text-decoration: line-through;
   min-height: 1em;
 }
+
+.stock {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.notInStock {
+  color: rgb(220, 13, 13);
+  font-size: 30px;
+  font-weight: 600;
+}

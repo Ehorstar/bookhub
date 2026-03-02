@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 type ArrowProps = {
   text: string;
   className?: string;
-  to: string;
+  to?: string;
 };
 
 function Arrow({ text, className, to }: ArrowProps) {
@@ -13,7 +13,7 @@ function Arrow({ text, className, to }: ArrowProps) {
   return (
     <div
       className={`${styles.seeMore} ${className ?? ""}`}
-      onClick={() => navigate(to)}
+      onClick={() => navigate(to?? "")}
     >
       <span className={styles.text}>{text}</span>
 

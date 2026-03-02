@@ -14,9 +14,7 @@ export default function InStock({ inStock }: InStockProps) {
           <p>В наявності</p>
         </div>
       ) : (
-        <div className={`${styles.stock} ${styles.notInStock}`}>
-          <p>Незабаром у продажу</p>
-        </div>
+       null
       )}
     </div>
   );

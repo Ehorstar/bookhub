@@ -12,6 +12,7 @@ import {
   useGetStatusQuery,
   useLogoutMutation,
 } from "../../../features/auth/api/auth.api";
+import { useNavigate } from "react-router-dom";
 
 function Menu() {
   const [show, setShow] = useState(false);
@@ -19,7 +20,7 @@ function Menu() {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [logout] = useLogoutMutation();
   const { data } = useGetStatusQuery();
-
+  const navigate = useNavigate();
   const isAuth = data?.isAuthenticated;
 
   useEffect(() => {
@@ -43,7 +44,7 @@ function Menu() {
       {isAuth ? (
         <div className={styles.content} onClick={() => setShow(!show)}>
           <UserOutlined className={styles.icon} />
-          <p className={styles.text}>Вітаємо!</p>
+          <p className={styles.text}>Вітаємо {data?.username}!</p>
           <UpOutlined
             className={`${styles.iconArrow} ${show ? styles.rotate : ""}`}
           />
@@ -68,14 +69,15 @@ function Menu() {
           <span className={styles.itemText}>Профіль</span>
         </button>
 
-        <button className={styles.item} type="button">
+        <button
+          className={styles.item}
+          type="button"
+          onClick={() => {
+            (navigate("/orders"), setShow(false));
+          }}
+        >
           <ShoppingOutlined className={styles.itemIcon} />
           <span className={styles.itemText}>Мої замовлення</span>
-        </button>
-
-        <button className={styles.item} type="button">
-          <BookOutlined className={styles.itemIcon} />
-          <span className={styles.itemText}>Бібліотека</span>
         </button>
 
         <button

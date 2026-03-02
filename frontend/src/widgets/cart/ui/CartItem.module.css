@@ -80,6 +80,7 @@
 }
 
 .coverImage {
+  cursor: pointer;
   max-width: 70px;
   max-height: 110px;
 }

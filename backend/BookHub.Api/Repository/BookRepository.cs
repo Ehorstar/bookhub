@@ -14,12 +14,11 @@ namespace BookHub.Api.Repository
     }
     public class BookRepository : Repository<Book>, IBookRepository
     {
-        public BookRepository(IOptions<MongoDbSettings> settings) : base(settings)
+        public BookRepository(IMongoDatabase database) : base(database)
         {
-
         }
-         
-           public async Task<List<Book>> GetByIdsAsync(List<string> ids) 
+
+        public async Task<List<Book>> GetByIdsAsync(List<string> ids) 
            {
 
             var objectIds = ids.Select(id => new ObjectId(id)).ToList();

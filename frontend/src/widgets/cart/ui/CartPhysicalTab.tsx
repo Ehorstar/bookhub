@@ -1,20 +1,12 @@
 import styles from "./CartPhysicalTab.module.css";
 import logo from "../../../assets/ImagesMenu/empty-cart.svg";
-import {
-  useGetCartQuery,
-  useRemoveItemMutation,
-  useSetItemQtyMutation,
-} from "../../../features/cart/api/cart.api";
+import { useGetCartQuery } from "../../../features/cart/api/cart.api";
 import CartItem from "./CartItem";
-import { useState } from "react";
 import CartTotalBar from "./CartTotalBar";
 
 function CartPhysicalTab() {
   const { data, isLoading: loading } = useGetCartQuery();
   const cart = data?.items;
-  const [setItemQty] = useSetItemQtyMutation();
-  const [removeItem] = useRemoveItemMutation();
-  const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   if (loading) {
     return (
@@ -36,28 +28,12 @@ function CartPhysicalTab() {
     );
   }
 
-  const setQty = async (bookId: string, qty: number) => {
-    setUpdatingId(bookId);
-    try {
-      await setItemQty({ bookId, qty }).unwrap();
-    } finally {
-      setUpdatingId(null);
-    }
-  };
-
   return (
     <div className={styles.layout}>
       <div className={styles.cartItems}>
         {cart.items.map((it) => (
           <div className={styles.cartItem}>
-            <CartItem
-              item={it.book}
-              quantity={it.quantity}
-              removeItem={() => removeItem(it.book.id)}
-              incItemQty={() => setQty(it.book.id, it.quantity + 1)}
-              decItemQty={() => setQty(it.book.id, it.quantity - 1)}
-              isUpdating={updatingId === it.book.id}
-            />
+            <CartItem item={it.book} quantity={it.quantity} />
           </div>
         ))}
       </div>

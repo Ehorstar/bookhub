@@ -8,7 +8,8 @@ namespace BookHub.Api.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
-
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? UserId { get; set; }
         [BsonElement("cartId")]
         public string CartId { get; set; } = null!;
 

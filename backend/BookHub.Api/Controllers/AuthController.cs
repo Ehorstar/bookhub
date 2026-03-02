@@ -17,11 +17,13 @@ namespace BookHub.Api.Controllers
         private const string AuthCookieName = "jwtToken";
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwt;
+        private readonly ICartRepository _cartRepository;
 
-        public AuthController(IUserRepository userRepository, IJwtService jwt)
+        public AuthController(IUserRepository userRepository, IJwtService jwt, ICartRepository cartRepository)
         {
             _userRepository = userRepository;
             _jwt = jwt;
+            _cartRepository = cartRepository;
         }
 
         [HttpGet("status")]
@@ -49,6 +51,8 @@ namespace BookHub.Api.Controllers
                 username = user.UserName,
                 firstName = user.FirstName,
                 lastName = user.LastName,
+                city = user.City,
+                department = user.Department,
                 phone = user.Phone,
                 birthDate = user.BirthDate
             });
@@ -68,7 +72,7 @@ namespace BookHub.Api.Controllers
                 UserName = req.UserName,
                 Email = req.Email,
                 PasswordHash = hash,
-                Phone = req.Phone
+                Phone = req.Phone,
             };
 
             await _userRepository.CreateUserAsync(user);
@@ -82,7 +86,10 @@ namespace BookHub.Api.Controllers
             var user = await _userRepository.GetByEmail(req.Email);
             if (user == null)
                 return Unauthorized("Invalid email or password");
-
+            if (Request.Cookies.TryGetValue("cartId", out var cartId))
+            {
+                await _cartRepository.SetUserIdAsync(cartId, user.Id!);
+            }
             var ok = BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash);
             if (!ok)
                 return Unauthorized("Invalid email or password");
@@ -92,18 +99,18 @@ namespace BookHub.Api.Controllers
             Response.Cookies.Append(AuthCookieName, token, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = Request.IsHttps,
-                SameSite = SameSiteMode.Lax,
+                Secure = true,                 
+                SameSite = SameSiteMode.None,  
                 Expires = DateTimeOffset.UtcNow.AddDays(30)
             });
 
             return Ok(new
             {
-                user = new { user.Id, user.UserName, user.Email, user.Phone, user.FirstName,user.LastName, user.BirthDate }
+                user = new { user.Id, user.UserName, user.Email, user.Phone, user.FirstName, user.LastName, user.BirthDate }
             });
         }
 
-       
+
         [HttpPatch("profile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequestDto req)
         {
@@ -114,9 +121,21 @@ namespace BookHub.Api.Controllers
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null) return Unauthorized();
 
-            user.Phone = req.Phone ?? user.Phone;
-            user.FirstName = req.FirstName ?? user.FirstName;
-            user.LastName = req.LastName ?? user.LastName;
+            if (!string.IsNullOrWhiteSpace(req.Phone))
+                user.Phone = req.Phone.Trim();
+
+            if (!string.IsNullOrWhiteSpace(req.FirstName))
+                user.FirstName = req.FirstName.Trim();
+
+            if (!string.IsNullOrWhiteSpace(req.LastName))
+                user.LastName = req.LastName.Trim();
+
+            if (!string.IsNullOrWhiteSpace(req.City))
+                user.City = req.City.Trim();
+
+            if (!string.IsNullOrWhiteSpace(req.Department))
+                user.Department = req.Department.Trim();
+
             user.BirthDate = req.BirthDate ?? user.BirthDate;
 
             await _userRepository.ReplaceAsync(userId, user);

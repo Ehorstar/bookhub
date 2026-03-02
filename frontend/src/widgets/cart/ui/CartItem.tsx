@@ -5,21 +5,41 @@ import styles from "./CartItem.module.css";
 import Genre from "../../../shared/ui/Genre/Genre";
 import type { CartItemProps } from "../model/cart-item";
 import AddToWishlistButton from "../../../features/wishlist/ui/AddToWishlistButton";
+import { useNavigate } from "react-router-dom";
+import {
+  useRemoveItemMutation,
+  useSetItemQtyMutation,
+} from "../../../features/cart/api/cart.api";
+import { useState } from "react";
 
-function CartItem({
-  item: it,
-  quantity,
-  removeItem,
-  incItemQty,
-  decItemQty,
-  isUpdating,
-}: CartItemProps) {
+function CartItem({ item: it, quantity }: CartItemProps) {
+  const navigate = useNavigate();
+
+  const [setItemQty] = useSetItemQtyMutation();
+  const [removeItem] = useRemoveItemMutation();
+
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
+
+  const setQty = async (bookId: string, qty: number) => {
+    setUpdatingId(bookId);
+    try {
+      await setItemQty({ bookId, qty }).unwrap();
+    } finally {
+      setUpdatingId(null);
+    }
+  };
+
   return (
     <div className={styles.cartItem}>
       <div className={styles.itemInfo}>
         <div className={styles.itemUp}>
           <div className={styles.itemUpLeft}>
-            <img src={it.coverImage} alt="" className={styles.coverImage} />
+            <img
+              src={it.coverImage}
+              alt=""
+              className={styles.coverImage}
+              onClick={() => navigate(`book/${it.slug}`)}
+            />
             <div className={styles.mainText}>
               <Genre categories={it.categories} />
               <div>
@@ -28,7 +48,7 @@ function CartItem({
               </div>
             </div>
           </div>
-          <div className={styles.itemUpRight} onClick={() => removeItem()}>
+          <div className={styles.itemUpRight} onClick={() => removeItem(it.id)}>
             <DeleteButton tippy={"Видалити"} />
           </div>
         </div>
@@ -47,9 +67,9 @@ function CartItem({
             >
               <div
                 className={`${styles.quantityBtn} ${
-                  quantity === 1 || isUpdating ? styles.quantityBtnDisabled : ""
+                  quantity === 1 || updatingId ? styles.quantityBtnDisabled : ""
                 } `}
-                onClick={() => decItemQty()}
+                onClick={() => setQty(it.id, quantity - 1)}
               >
                 <MinusOutlined />
               </div>
@@ -65,9 +85,9 @@ function CartItem({
             >
               <div
                 className={`${styles.quantityBtn} ${
-                  isUpdating ? styles.quantityBtnDisabled : ""
+                  updatingId ? styles.quantityBtnDisabled : ""
                 } `}
-                onClick={() => incItemQty()}
+                onClick={() => setQty(it.id, quantity + 1)}
               >
                 <PlusOutlined />
               </div>
