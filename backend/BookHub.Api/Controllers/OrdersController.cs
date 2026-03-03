@@ -2,6 +2,7 @@
 using BookHub.Api.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using Nethereum.Web3;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -52,6 +53,7 @@ public class OrdersController : ControllerBase
         if (cart == null || cart.Items.Count == 0)
             return BadRequest("Cart is empty");
 
+
         var ids = cart.Items.Select(i => i.BookId)
             .Where(id => !string.IsNullOrWhiteSpace(id))
             .Distinct()
@@ -71,9 +73,6 @@ public class OrdersController : ControllerBase
                 Quantity = i.Quantity
             })
             .ToList();
-
-        if (items.Count == 0)
-            return BadRequest("No valid items in cart");
 
         var total = items.Sum(i => i.Price * i.Quantity);
 
@@ -122,7 +121,11 @@ public class OrdersController : ControllerBase
                 LastName = req.LastName.Trim()
             }
         };
-
+        foreach (var item in items)
+        {
+            var ok = await _books.TryDecreaseStockAsync(item.BookId, item.Quantity);
+            if (!ok) return BadRequest("Not enough stock");
+        }
         await _orders.CreateAsync(order);
         await _cart.ClearByCartIdAsync(cartId);
 

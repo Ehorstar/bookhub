@@ -54,9 +54,6 @@ namespace BookHub.Api.Entities
         [BsonElement("binding")]
         public string Binding { get; set; } = null!;
 
-        [BsonElement("isbn")]
-        public string Isbn { get; set; } = null!;
-
         [BsonElement("rating")]
         public double Rating { get; set; }
 
