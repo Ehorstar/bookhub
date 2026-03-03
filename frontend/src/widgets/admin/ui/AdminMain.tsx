@@ -16,7 +16,7 @@ export default function AdminMain() {
   const [loading, setLoading] = useState(false);
   const [orderStats, setOrderStats] = useState<{
     totalOrders: number;
-    avgTotal: number;
+    averageOrderValue: number;
   } | null>(null);
 
   const refreshBalance = async () => {
@@ -95,7 +95,7 @@ export default function AdminMain() {
 
           <Statistic
             title="Average Order Value (ETH)"
-            value={orderStats.avgTotal}
+            value={orderStats.averageOrderValue}
             precision={4}
           />
         </div>
