@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Menu.module.css";
 import {
-  BookOutlined,
   LogoutOutlined,
+  SafetyCertificateOutlined,
   ShoppingOutlined,
   UpOutlined,
   UserOutlined,
@@ -10,6 +10,7 @@ import {
 import { useUiState } from "../model/modal-state.store";
 import {
   useGetStatusQuery,
+  useIsAdminQuery,
   useLogoutMutation,
 } from "../../../features/auth/api/auth.api";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,8 @@ function Menu() {
   const { data } = useGetStatusQuery();
   const navigate = useNavigate();
   const isAuth = data?.isAuthenticated;
+
+  const { data: isAdmin } = useIsAdminQuery();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -79,6 +82,19 @@ function Menu() {
           <ShoppingOutlined className={styles.itemIcon} />
           <span className={styles.itemText}>Мої замовлення</span>
         </button>
+
+        {isAdmin && (
+          <button
+            className={styles.item}
+            type="button"
+            onClick={() => {
+              (navigate("/admin"), setShow(false));
+            }}
+          >
+            <SafetyCertificateOutlined className={styles.itemIcon} />
+            <span className={styles.itemText}>Адмін</span>
+          </button>
+        )}
 
         <button
           className={`${styles.item} ${styles.danger}`}
