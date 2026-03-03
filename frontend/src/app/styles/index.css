@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tippy-box[data-theme~="menu"] {
+  background-color: #2b2f36;
+  color: #fff;
+  font-size: 14px;
+  padding: 0;
+  border-radius: 6px;
+  font-family: var(--font-base);
+  text-align: center;
+  white-space: pre-line;
+}
+
+.tippy-box[data-theme~="menu"] .tippy-content {
+  padding: 6px 10px;
+}
+
+.tippy-box[data-theme~="menu"] .tippy-arrow {
+  color: #2b2f36;
+}
+
+.container {
+  max-width: 1740px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-family: var(--font-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg);
+}
+
+:root {
+  --color-bg: rgba(184, 198, 209, 0.129);
+  --color-main: rgb(13, 89, 220);
+  --color-header: #ffffff;
+  --color-footer: #ffffff;
+  --color-textFirst: #000000;
+  --color-textSecond: #777;
+  --font-base: "SN Pro", sans-serif;
+  --color-price: #ff0000;
+  --color-overlay: rgba(0, 0, 0, 0.178);
+  --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.171);
+}
+
+.devider {
+  width: 100%;
+  border-bottom: 1px solid rgba(165, 187, 205, 0.67);
+}
+
+.deviderVertical {
+  height: 40px;
+  border-left: 1px solid rgba(165, 187, 205, 0.67);
+}
+
+.link {
+  position: relative;
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.link::after {
+  content: "";
+  left: 0;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background-color: rgb(13, 89, 220);
+  transition: width 0.3s ease;
+  position: absolute;
+}
+
+.link:hover {
+  color: rgb(13, 89, 220);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.prices {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  min-height: 36px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-price);
+}
+
+.oldPrice {
+  font-size: 16px;
+  text-decoration: line-through;
+  min-height: 1em;
+  margin: 0;
+}
+
+.oldPriceHidden {
+  visibility: hidden;
+}

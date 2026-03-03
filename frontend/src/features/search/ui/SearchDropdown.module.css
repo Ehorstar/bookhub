@@ -1,0 +1,62 @@
+.dropdown {
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 20px;
+}
+
+.dropdownWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  width: 600px;
+  z-index: 1000;
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+  background: white;
+  overflow: hidden;
+}
+
+.item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 16px;
+  border-radius: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.text {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.author {
+  font-size: 16px;
+}
+
+.item:hover {
+  background-color: rgba(165, 187, 205, 0.237);
+}
+
+.priceBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

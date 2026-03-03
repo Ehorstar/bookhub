@@ -1,0 +1,39 @@
+.list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  color: #8a93a3;
+  font-size: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link {
+  color: #8590a3;
+  text-decoration: none;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.link:hover {
+  color: rgb(13, 89, 220);
+}
+.sep {
+  color: #c4c9d4;
+  font-size: 13px;
+  align-items: center;
+  display: flex;
+}
+
+.current {
+  color: #111827;
+  font-weight: 600;
+  font-size: 20px;
+}

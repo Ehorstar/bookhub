@@ -1,0 +1,106 @@
+.page {
+  padding: 24px 0;
+}
+
+.title {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 6px 0 22px;
+}
+
+.state {
+  padding: 24px 0;
+  font-size: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 300px 1fr 280px 300px 200px;
+  align-items: center;
+  padding: 18px 22px;
+  border-top: 1px solid #eceef2;
+  transition: all 0.3s ease;
+}
+
+.row:hover {
+  background-color: rgba(13, 89, 220, 0.05);
+}
+
+.head {
+  border-top: none;
+  padding: 16px 22px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.cellBorder {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #e5e7eb;
+  padding-left: 18px;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+}
+
+.orderNumber {
+  color: var(--color-main);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.covers {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  min-height: 64px;
+}
+
+.cover {
+  width: 44px;
+  height: 62px;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  background: #fff;
+  min-width: 120px;
+}
+
+.badgeGreen {
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.45);
+}
+
+.badgeGray {
+  color: #9ca3af;
+  border-color: rgba(156, 163, 175, 0.55);
+}
+
+.totalValue {
+  color: #ef4444;
+  font-weight: 700;
+}

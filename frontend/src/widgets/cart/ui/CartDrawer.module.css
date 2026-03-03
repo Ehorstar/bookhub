@@ -1,0 +1,67 @@
+.main {
+  user-select: none;
+}
+
+.cartButton {
+  position: relative;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 900;
+  transition:
+    opacity 300ms ease,
+    background-color 500ms ease;
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cartList {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: min(650px, 100vw);
+  background-color: var(--color-header);
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 400ms ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartListOpen {
+  transform: translateX(0);
+}
+
+.icon {
+  font-size: 28px;
+  padding: 14px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.icon:hover {
+  background-color: rgba(165, 187, 205, 0.237);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 35px 35px;
+  font-size: 28px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
