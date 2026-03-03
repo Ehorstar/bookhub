@@ -16,6 +16,11 @@ export const authApi = createApi({
   }),
   tagTypes: ["Auth"],
   endpoints: (builder) => ({
+    isAdmin: builder.query<boolean, void>({
+      query: () => "/user/user-role",
+      transformResponse: (res: { isAdmin: boolean }) => res.isAdmin,
+      providesTags: ["Auth"],
+    }),
     updateProfile: builder.mutation<void, UpdateProfileRequest>({
       query: (body) => ({
         url: "/user/profile",
@@ -59,6 +64,7 @@ export const authApi = createApi({
 });
 
 export const {
+  useIsAdminQuery,
   useLoginMutation,
   useLogoutMutation,
   useGetStatusQuery,

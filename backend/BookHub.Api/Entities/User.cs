@@ -35,5 +35,8 @@ namespace BookHub.Api.Entities
 
         [BsonElement("birthDate")]
         public DateTime? BirthDate { get; set; }
+
+        [BsonElement("roles")]
+        public List<string> Roles { get; set; } = new() { "User" };
     }
 }
