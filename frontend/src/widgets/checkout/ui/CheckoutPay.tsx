@@ -4,8 +4,8 @@ import type { OrderRequest } from "../../../entities/Order/model/types";
 import { useGetStatusQuery } from "../../../features/auth/api/auth.api";
 import { useGetCartQuery } from "../../../features/cart/api/cart.api";
 import styles from "./CheckoutPay.module.css";
-import { payAndCreateOrder } from "../../../shared/ui/Blockchain/payAndCreateOrder";
-import { getContractAddress } from "../../../shared/ui/Blockchain/contract";
+import { payAndCreateOrder } from "../../../shared/lib/Blockchain/payAndCreateOrder";
+import { getContractAddress } from "../../../shared/lib/Blockchain/contract";
 
 type CheckoutPayProps = {
   firstName: string;

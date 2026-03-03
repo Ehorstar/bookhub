@@ -24,6 +24,7 @@ function App() {
     "/users-agreement",
     "/checkout",
     "/orders",
+    "/admin",
   ];
   const location = useLocation();
 

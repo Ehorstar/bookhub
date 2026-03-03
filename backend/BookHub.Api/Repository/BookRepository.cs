@@ -9,8 +9,9 @@ namespace BookHub.Api.Repository
     {
         Task<List<Book>> GetByIdsAsync(List<string> ids);
         Task<Book> GetBySlugAsync(string slug);
+        Task ReplaceAsync(string id, Book existing);
         Task<List<Book>> SearchBooks(string search);
-
+        Task<bool> TryDecreaseStockAsync(string bookId, int qty);
     }
     public class BookRepository : Repository<Book>, IBookRepository
     {
@@ -18,22 +19,22 @@ namespace BookHub.Api.Repository
         {
         }
 
-        public async Task<List<Book>> GetByIdsAsync(List<string> ids) 
-           {
+        public async Task<List<Book>> GetByIdsAsync(List<string> ids)
+        {
 
             var objectIds = ids.Select(id => new ObjectId(id)).ToList();
 
             var filter = Builders<Book>.Filter.In("_id", objectIds);
 
             return await _collection.Find(filter).ToListAsync();
-            
-            }
-        
-           public async Task<Book> GetBySlugAsync(string slug)
-           {
+
+        }
+
+        public async Task<Book> GetBySlugAsync(string slug)
+        {
             var filter = Builders<Book>.Filter.Eq("Slug", slug);
             return await _collection.Find(filter).FirstOrDefaultAsync();
-           }
+        }
 
         public async Task<List<Book>> SearchBooks(string search)
         {
@@ -52,6 +53,23 @@ namespace BookHub.Api.Repository
                 .Limit(20)
                 .ToListAsync();
         }
+        public async Task<bool> TryDecreaseStockAsync(string bookId, int qty)
+        {
+            var filter = Builders<Book>.Filter.And(
+                Builders<Book>.Filter.Eq(b => b.Id, bookId),
+                Builders<Book>.Filter.Gte(b => b.StockCount, qty)
+            );
+
+            var update = Builders<Book>.Update.Inc(b => b.StockCount, -qty);
+
+            var res = await _collection.UpdateOneAsync(filter, update);
+            return res.ModifiedCount == 1;
+        }
+
+        public async Task ReplaceAsync(string id, Book existing)
+        {
+            var filter = Builders<Book>.Filter.Eq("_id", new ObjectId(id));
+            await _collection.ReplaceOneAsync(filter, existing);
+        }
     }
-    
 }

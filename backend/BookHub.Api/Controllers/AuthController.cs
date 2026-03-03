@@ -5,6 +5,7 @@ using BookHub.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -18,12 +19,26 @@ namespace BookHub.Api.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwt;
         private readonly ICartRepository _cartRepository;
+        private readonly IConfiguration _config;
 
-        public AuthController(IUserRepository userRepository, IJwtService jwt, ICartRepository cartRepository)
+        public AuthController(IUserRepository userRepository, IJwtService jwt, ICartRepository cartRepository, IConfiguration config)
         {
             _userRepository = userRepository;
             _jwt = jwt;
             _cartRepository = cartRepository;
+            _config = config;
+        }
+
+        [Authorize]
+        [HttpGet("user-role")]
+        public IActionResult GetUserRole()
+        {
+            var isAdmin = User.IsInRole("Admin");
+
+            return Ok(new
+            {
+                isAdmin
+            });
         }
 
         [HttpGet("status")]
@@ -66,7 +81,8 @@ namespace BookHub.Api.Controllers
                 return BadRequest("Email already registered");
 
             var hash = BCrypt.Net.BCrypt.HashPassword(req.Password);
-
+            
+            
             var user = new User
             {
                 UserName = req.UserName,
@@ -74,6 +90,16 @@ namespace BookHub.Api.Controllers
                 PasswordHash = hash,
                 Phone = req.Phone,
             };
+
+            user.Roles = new() { "User" };
+
+            var seedEmail = _config["Admin:SeedEmail"];
+
+            if (!string.IsNullOrWhiteSpace(seedEmail) &&
+                user.Email.Equals(seedEmail, StringComparison.OrdinalIgnoreCase))
+            {
+                user.Roles.Add("Admin");
+            }
 
             await _userRepository.CreateUserAsync(user);
 
