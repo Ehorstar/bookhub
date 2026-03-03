@@ -33,7 +33,7 @@ function BookCard({ book }: { book: Book }) {
             </div>
 
             <div onClick={stop}>
-              {book.inStock ? (
+              {book.stockCount > 0 ? (
                 <div className={styles.cartButton}>
                   <CartButton book={book} />
                 </div>
